@@ -45,6 +45,22 @@ pipeline {
                 }
             }
         }
+        stage('Deploy Image') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'docker-dev', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    script {
+                        dockerDev.name = "docker-dev"
+                        dockerDev.host = "${dockerDevHost}"
+                        dockerDev.user = "${USERNAME}"
+                        dockerDev.password = "${PASSWORD}"
+                        dockerDev.allowAnyHosts = true
+                    }
+
+                    sshPut remote: dockerDev, from: './docker-compose.yml', into: "./${imageName}-docker-compose.yml"
+                    sshCommand remote: dockerDev, command: "export ${appEnvVariableName}=${appEnvVariable}; docker-compose -f ./${imageName}-docker-compose.yml up -d"
+                }
+            }
+        }
 
     }
 }

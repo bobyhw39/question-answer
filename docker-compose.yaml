@@ -8,7 +8,7 @@ networks:
   services: {}
 services:
   api-service:
-    image: 10.10.11.6:8083/qustionanswer
+    image: 10.10.11.6:8083/enigmacamp/izmi/qustionanswer
     restart: always
     depends_on:
       - db
