@@ -18,12 +18,6 @@
         <java.version>11</java.version>
     </properties>
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>central</id>
-            <url>http://10.10.11.6/repository/maven-public/</url>
-        </pluginRepository>
-    </pluginRepositories>
 
     <distributionManagement>
         <snapshotRepository>
